@@ -1,11 +1,11 @@
+import { RouterProvider } from 'react-router-dom';
 import './App.css';
+import { router } from './Routes/Router/Router';
 
 function App() {
   return (
     <div className="App">
-      <h2>This is Travelaro Website Home route</h2>
-      <button class="btn btn-primary">Button</button>
-      <button class="btn w-64 rounded-full">Button</button>
+      <RouterProvider router={router}></RouterProvider>
     </div>
   );
 }
