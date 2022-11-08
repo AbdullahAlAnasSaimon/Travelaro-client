@@ -1,13 +1,16 @@
 import React, { useContext } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { FaFacebook } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLoaderData, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 import toast from 'react-hot-toast';
 
 const Login = () => {
   const {logInUser, setUser} = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location?.state?.from?.pathname || '/';
 
   const handleLogIn = event =>{
     event.preventDefault();
@@ -20,8 +23,9 @@ const Login = () => {
       const user = result.user;
       toast.success('Log In Successfull');
       setUser(user)
-      navigate('/');
+      navigate(from, {replace: true});
     })
+    .catch(err => toast.error('Error: ' + err.message.slice(9, err.message.length)))
 
   }
 

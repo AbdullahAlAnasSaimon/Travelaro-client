@@ -34,7 +34,7 @@ const SignUp = () => {
         logOut();
         navigate('/login');
       })
-      .catch(err => toast.error('Error: ' + err.message.slice(9, err.message.length - 1)))
+      .catch(err => toast.error('Error: ' + err.message.slice(9, err.message.length)))
   }
 
   const handleGoogleSignIn = () =>{
