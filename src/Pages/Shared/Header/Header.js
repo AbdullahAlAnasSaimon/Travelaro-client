@@ -44,7 +44,7 @@ const Header = () => {
               </ul>
             </li>
             <li><Link to='/blog'>Blog</Link></li>
-            <li><Link to='/blog'>{user.email}</Link></li>
+            <li><Link to='/blog'>{user?.email}</Link></li>
           </ul>
         </div>
         <div className="navbar-end">
