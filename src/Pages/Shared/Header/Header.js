@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { FaLongArrowAltRight } from 'react-icons/fa';
+import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
+
+
 const Header = () => {
+  const {user} = useContext(AuthContext);
   return (
     <div className='bg-[#002333]'>
       <div className="navbar w-full md:w-11/12 mx-auto">
@@ -40,6 +44,7 @@ const Header = () => {
               </ul>
             </li>
             <li><Link to='/blog'>Blog</Link></li>
+            <li><Link to='/blog'>{user.email}</Link></li>
           </ul>
         </div>
         <div className="navbar-end">
