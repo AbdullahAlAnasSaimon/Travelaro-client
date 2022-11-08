@@ -1,9 +1,21 @@
 import React from 'react';
+import { useLoaderData } from 'react-router-dom';
+import Service from '../Service/Service';
 
 const Services = () => {
+  const services = useLoaderData();
+  console.log(services);
   return (
     <div>
       <h2>Services page</h2>
+      <div className='grid grid-cols-3 gap-5'>
+        {
+          services.map(service => <Service
+            key={service.id}
+            service={service}
+          ></Service>)
+        }
+      </div>
     </div>
   );
 };
