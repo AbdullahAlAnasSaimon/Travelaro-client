@@ -42,9 +42,6 @@ const Header = () => {
         <div className="navbar-center hidden lg:flex text-white">
           <ul className="menu menu-horizontal p-0">
             <li><Link to='/'>Home</Link></li>
-            {
-              user && <li><Link to='/dashboard'>Dashboard</Link></li>
-            }
             <li tabIndex={0}>
               <Link to='/services'>
                 Services
@@ -79,7 +76,7 @@ const Header = () => {
                         <span className="badge">New</span>
                       </Link>
                     </li>
-                    <li><Link>Add Service</Link></li>
+                    <li><Link to='/add-service'>Add Service</Link></li>
                     <li><Link><button onClick={handleLogOut}>Log Out</button></Link></li>
                   </ul>
                 </div>
