@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 import toast from 'react-hot-toast';
 import { FacebookAuthProvider, GoogleAuthProvider } from 'firebase/auth';
+import useTitle from '../../Hook/useTitle/useTitle';
 
 const SignUp = () => {
   const {createUser, logOut, signInWithGoogle, signInWithfacebook, setUser} = useContext(AuthContext);
@@ -13,6 +14,7 @@ const SignUp = () => {
   const facebookProvider = new FacebookAuthProvider;
 
   const navigate = useNavigate();
+  useTitle('Sign Up')
 
   const handleSignUp = event =>{
     event.preventDefault();
