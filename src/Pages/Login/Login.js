@@ -1,16 +1,20 @@
 import React, { useContext } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { FaFacebook } from 'react-icons/fa';
-import { Link, useLoaderData, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 import toast from 'react-hot-toast';
+import { FacebookAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 
 const Login = () => {
-  const {logInUser, setUser} = useContext(AuthContext);
+  const {logInUser, setUser, signInWithGoogle, signInWithfacebook } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
 
   const from = location?.state?.from?.pathname || '/';
+
+  const googleProvider = new GoogleAuthProvider();
+  const facebookProvider = new FacebookAuthProvider();
 
   const handleLogIn = event =>{
     event.preventDefault();
@@ -26,14 +30,33 @@ const Login = () => {
       navigate(from, {replace: true});
     })
     .catch(err => toast.error('Error: ' + err.message.slice(9, err.message.length)))
+  }
 
+  const handleGoogleSignIn = () =>{
+    signInWithGoogle(googleProvider)
+    .then(result =>{
+      const user = result.user;
+      setUser(user);
+      toast.success('Sign Up Successfull');
+    })
+    .catch(err => toast.error("Error: " + err.message.slice(9, err.message.length)))
+  }
+
+  const handleFacebookSignIn = () =>{
+    signInWithfacebook(facebookProvider)
+    .then(result =>{
+      const user = result.user;
+      setUser(user);
+      toast.success('Sign Up Successfull');
+    })
+    .catch(err => toast.error("Error: " + err.message.slice(9, err.message.length)))
   }
 
   return (
     <div>
       <div>
-        <button className='text-3xl'><FcGoogle/></button>
-        <button className='text-3xl'><FaFacebook/></button>
+        <button onClick={handleGoogleSignIn} className='text-3xl'><FcGoogle/></button>
+        <button onClick={handleFacebookSignIn} className='text-3xl'><FaFacebook/></button>
       </div>
       <form onSubmit={handleLogIn}>
         <div>

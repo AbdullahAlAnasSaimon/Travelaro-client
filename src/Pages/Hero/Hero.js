@@ -1,15 +1,18 @@
 import React from 'react';
+import heroImg from '../../images/hero/Hotel-Booking-cuate.png';
 
 const Hero = () => {
   return (
-    <div>
-      <div className="hero min-h-screen bg-base-200">
-        <div className="hero-content flex-col lg:flex-row-reverse">
-          <img src="https://placeimg.com/260/400/arch" className="max-w-sm rounded-lg shadow-2xl" alt=''/>
-          <div>
-            <h1 className="text-5xl font-bold">Box Office News!</h1>
-            <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
-            <button className="btn btn-primary">Get Started</button>
+    <div className='w-full md:w-11/12 mx-auto'>
+      <div className="hero">
+        <div className="hero-content justify-between flex-col lg:flex-row-reverse">
+          <div className='w-5/12'>
+            <img className='w-10/12' src={heroImg} alt="" />
+          </div>
+          <div className='w-7/12'>
+            <h1 className="text-5xl font-bold text-[#002333]">Explore The World!</h1>
+            <p className="py-6 text-gray-600 w-10/12">Travel is the movement of people between distant geographical locations. Travel can be done by foot, train, boat, bus, airplane and can be one way or round trip.</p>
+            <button className="">Get Started</button>
           </div>
         </div>
       </div>
