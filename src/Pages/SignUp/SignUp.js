@@ -1,12 +1,14 @@
 import React, { useContext } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { FaFacebook } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 import toast from 'react-hot-toast';
 
 const SignUp = () => {
   const {createUser, setUser, logOut} = useContext(AuthContext);
+
+  const navigate = useNavigate();
 
   const handleSignUp = event =>{
     event.preventDefault();
@@ -21,6 +23,9 @@ const SignUp = () => {
       .then(result => {
         const user = result.user;
         console.log(user);
+        toast.success('Sign Up Successfull');
+        logOut();
+        navigate('/login');
       })
       .catch(err => toast.error('Error: ' + err.message.slice(9, err.message.length - 1)))
 

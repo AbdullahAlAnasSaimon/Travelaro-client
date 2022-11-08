@@ -1,11 +1,19 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { FaLongArrowAltRight } from 'react-icons/fa';
+import { FaLongArrowAltRight, FaPaperPlane } from 'react-icons/fa';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
+import toast from 'react-hot-toast';
 
 
 const Header = () => {
-  const {user} = useContext(AuthContext);
+  const {user, logOut} = useContext(AuthContext);
+
+  const handleLogOut = () =>{
+    logOut()
+    .then(() => {})
+    .catch(err => toast.error('Error: ' + err.message.slice(9, err.message.length - 1)))
+  }
+
   return (
     <div className='bg-[#002333]'>
       <div className="navbar w-full md:w-11/12 mx-auto">
@@ -28,7 +36,7 @@ const Header = () => {
               <li><Link to='/blog'>Blog</Link></li>
             </ul>
           </div>
-          <Link to='/' className="text-xl md:text-2xl font-semibold text-white">Travel<span className='font-bold text-[#2bf29c]'>aro</span></Link>
+          <Link to='/' className="text-xl md:text-2xl font-semibold text-white">Travel<span className='font-bold text-[#2bf29c]'>aro</span><FaPaperPlane className='inline-block text-sm -mt-5'/></Link>
         </div>
         <div className="navbar-center hidden lg:flex text-white">
           <ul className="menu menu-horizontal p-0">
@@ -44,11 +52,18 @@ const Header = () => {
               </ul>
             </li>
             <li><Link to='/blog'>Blog</Link></li>
-            <li><Link to='/blog'>{user?.email}</Link></li>
           </ul>
         </div>
         <div className="navbar-end">
-          <Link to='/signup' className="text-center bg-[#2bf29c] hover:bg-[#19e98f] py-2 px-3 rounded-md">Get Started<FaLongArrowAltRight className='inline-block ml-2' /> </Link>
+          {
+            user ?
+            <>
+              <p className='text-white mr-3'>{user?.email}</p>
+              <button onClick={handleLogOut} className="text-center bg-[#2bf29c] hover:bg-[#19e98f] py-2 px-3 rounded-md">Log Out</button>
+            </>
+            :
+            <Link to='/signup' className="text-center bg-[#2bf29c] hover:bg-[#19e98f] py-2 px-3 rounded-md">Get Started<FaLongArrowAltRight className='inline-block ml-2' /> </Link>
+          }
         </div>
       </div>
     </div>
