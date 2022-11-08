@@ -1,17 +1,17 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { FaLongArrowAltRight, FaPaperPlane } from 'react-icons/fa';
+import { FaLongArrowAltRight, FaPaperPlane, FaUserCircle } from 'react-icons/fa';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 import toast from 'react-hot-toast';
 
 
 const Header = () => {
-  const {user, logOut} = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
 
-  const handleLogOut = () =>{
+  const handleLogOut = () => {
     logOut()
-    .then(() => {})
-    .catch(err => toast.error('Error: ' + err.message.slice(9, err.message.length - 1)))
+      .then(() => { })
+      .catch(err => toast.error('Error: ' + err.message.slice(9, err.message.length - 1)))
   }
 
 
@@ -37,11 +37,14 @@ const Header = () => {
               <li><Link to='/blog'>Blog</Link></li>
             </ul>
           </div>
-          <Link to='/' className="text-xl md:text-2xl font-semibold text-white">Travel<span className='font-bold text-[#2bf29c]'>aro</span><FaPaperPlane className='inline-block text-sm -mt-5'/></Link>
+          <Link to='/' className="text-xl md:text-2xl font-semibold text-white">Travel<span className='font-bold text-[#2bf29c]'>aro</span><FaPaperPlane className='inline-block text-sm -mt-5' /></Link>
         </div>
         <div className="navbar-center hidden lg:flex text-white">
           <ul className="menu menu-horizontal p-0">
             <li><Link to='/'>Home</Link></li>
+            {
+              user && <li><Link to='/dashboard'>Dashboard</Link></li>
+            }
             <li tabIndex={0}>
               <Link to='/services'>
                 Services
@@ -58,12 +61,31 @@ const Header = () => {
         <div className="navbar-end">
           {
             user ?
-            <>
-              <p className='text-white mr-3'>{user?.email}</p>
-              <button onClick={handleLogOut} className="text-center bg-[#2bf29c] hover:bg-[#19e98f] py-2 px-3 rounded-md">Log Out</button>
-            </>
-            :
-            <Link to='/signup' className="text-center bg-[#2bf29c] hover:bg-[#19e98f] py-2 px-3 rounded-md">Get Started<FaLongArrowAltRight className='inline-block ml-2' /> </Link>
+              <>
+                <div className="dropdown dropdown-end">
+                  <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                    <div className="w-10 rounded-full">
+                      {
+                        user?.photoURL ? 
+                        <img src={user?.photoURL} alt="" /> : 
+                        <FaUserCircle className='text-white text-[40px]'/>
+                      }
+                    </div>
+                  </label>
+                  <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-[#002333] text-white rounded-box w-52">
+                    <li>
+                      <Link className="justify-between">
+                        My Reviews
+                        <span className="badge">New</span>
+                      </Link>
+                    </li>
+                    <li><Link>Add Service</Link></li>
+                    <li><Link><button onClick={handleLogOut}>Log Out</button></Link></li>
+                  </ul>
+                </div>
+              </>
+              :
+              <Link to='/signup' className="text-center bg-[#2bf29c] hover:bg-[#19e98f] py-2 px-3 rounded-md">Get Started<FaLongArrowAltRight className='inline-block ml-2' /> </Link>
           }
         </div>
       </div>
