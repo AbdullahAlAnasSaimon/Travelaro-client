@@ -3,20 +3,28 @@ import { Link, useLoaderData, useNavigate } from 'react-router-dom';
 import { FaUserCircle } from 'react-icons/fa';
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 import toast from 'react-hot-toast';
+import useTitle from '../../Hook/useTitle/useTitle';
+import ShowReviews from './ShowReviews/ShowReviews';
+
 
 const ServiceDetails = () => {
   const { user } = useContext(AuthContext);
-  const service = useLoaderData();
-  const navigate = useNavigate();
   const [reviews, setReviews] = useState([]);
-
+  const service = useLoaderData();
   const { _id, name, price, rating, photo, details } = service;
+  const navigate = useNavigate();
+  useTitle("Service Details")
+  // console.log(reviews);
+
+  console.log(reviews.sort((a, b) => a.insertTime - b.insertTime))
 
   useEffect(() => {
+
     fetch(`http://localhost:5000/reviews/${_id}`)
       .then(res => res.json())
       .then(data => setReviews(data))
-  }, [reviews, _id])
+
+  }, [_id])
 
   const handleAddReview = () => {
     if (!user) {
@@ -24,17 +32,36 @@ const ServiceDetails = () => {
     }
   }
 
-  const handleReviewSubmit = event =>{
+  const handleReviewSubmit = event => {
     event.preventDefault();
     const description = event.target.details.value;
+    const date = new Date();
+    const time = date.getTime();
 
-    const reviewInfor = {
-      email: user?.email,
-      photo: user?.PhotoURL,
-      userName: user?.displayName,
+    const reviewInfo = {
       serviceId: _id,
+      serviceName: name,
+      email: user?.email,
+      photo: user?.photoURL,
+      userName: user?.displayName,
       description,
+      insertTime: time
     }
+
+    fetch('http://localhost:5000/reviews', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(reviewInfo)
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+      if(data.acknowledged){
+        toast.success('Service Added Successfully');
+      }
+    })
   }
 
   return (
@@ -51,54 +78,40 @@ const ServiceDetails = () => {
           </div>
         </div>
       </div>
-      { !user &&
+      {!user &&
         <button onClick={handleAddReview} className="btn btn-primary">Add Review</button>
       }
       {
-        user && 
+        user &&
         <div>
-        <form onSubmit={handleReviewSubmit}>
-          <div className='flex justify-between m-7'>
-            <div className='w-full'>
-              <label htmlFor="title" className='block'>Write Your Review</label>
-              <textarea className='w-full h-28 block p-2 my-2 outline-0  border-2 border-gray-400 rounded-md focus:border-emerald-400' name="details" id="" placeholder='Enter Description'></textarea>
+          <form onSubmit={handleReviewSubmit}>
+            <div className='m-7'>
+              <div className='flex'>
+                <span className=''>
+                  <img className='w-10 rounded-full' src={user?.photoURL} alt="" />
+                </span>
+                <div className='w-full'>
+                  <div className='w-full'>
+                    <label htmlFor="title" className='block'>Write Your Review</label>
+                    <textarea className='w-full h-28 block p-2 my-2 outline-0  border-2 border-gray-400 rounded-md focus:border-emerald-400' name="details" id="" placeholder='Write Your Feedback'></textarea>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-          <button className='ml-5 btn bg-emerald-500 hover:bg-emerald-400 border-0' type='submit'>Post Review</button>
-        </form>
-      </div>
+            <button className='ml-5 btn bg-emerald-500 hover:bg-emerald-400 border-0' type='submit'>Post Review</button>
+          </form>
+        </div>
       }
+      <div>
+        {
+          reviews.map(review => <ShowReviews
+          key={review._id}
+          review={review}
+          ></ShowReviews>)
+        }
+      </div>
     </div>
   );
 };
-
-/* const ReviewForm = () => {
-  <div>
-    <form>
-      <div className='grid grid-cols-3 gap-x-8 m-7'>
-        <div className='col-span-2'>
-          <label htmlFor="title" className='block'>Service Name <small>(Max character 28)</small></label>
-          <input className='w-full p-2 my-2 outline-0 border-2 border-gray-400 rounded-md focus:border-emerald-400' type="text" name='title' placeholder='Service Name' />
-        </div>
-        <div>
-          <label htmlFor="price" className='block'>Price</label>
-          <input className='w-full p-2 my-2 outline-0 border-2 border-gray-400 rounded-md focus:border-emerald-400' type="text" name='price' placeholder='Price' />
-        </div>
-      </div>
-      <div className='w-auto m-7'>
-        <label htmlFor="photo" className='block'>Photo Url</label>
-        <input className='w-full p-2 my-2 outline-0 border-2 border-gray-400 rounded-md focus:border-emerald-400' type="text" name='photo' placeholder='Photo Url' />
-      </div>
-      <div className='flex justify-between m-7'>
-        <div className='w-full'>
-          <label htmlFor="title" className='block'>Description</label>
-          <textarea className='w-full h-28 block p-2 my-2 outline-0  border-2 border-gray-400 rounded-md focus:border-emerald-400' name="details" id="" placeholder='Enter Description'></textarea>
-        </div>
-      </div>
-      <button className='ml-5 btn bg-emerald-500 hover:bg-emerald-400 border-0' type='submit'>Add New Service</button>
-    </form>
-  </div>
-} */
-
 
 export default ServiceDetails;
