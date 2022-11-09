@@ -4,13 +4,21 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 
 const MyReviews = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
   const [myReviews, setMyReviews] = useState([]);
-  console.log(myReviews);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/reviews?email=${user?.email}`)
-      .then(res => res.json())
+    fetch(`http://localhost:5000/reviews?email=${user?.email}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('travelaro-token')}`
+      }
+    })
+      .then(res => {
+        if(res.status === 401 || res.status === 403){
+          logOut();
+        }
+        return res.json();
+      })
       .then(data => {
         setMyReviews(data);
       })
@@ -61,7 +69,7 @@ const SingleReview = ({ review, handleDelete }) => {
         <p>{description}</p>
       </div>
       <div>
-        <button className='bg-indigo-500 hover:bg-indigo-400 py-1 px-3 mx-2 rounded-md'>Update</button>
+        <Link to={`/edit-review/${_id}`}><button className='bg-indigo-500 hover:bg-indigo-400 py-1 px-3 mx-2 rounded-md'>Edit</button></Link>
         <button onClick={() => handleDelete(_id)} className='bg-red-500 hover:bg-red-400 py-1 px-3 mx-2 rounded-md'>Delete</button>
       </div>
     </div>

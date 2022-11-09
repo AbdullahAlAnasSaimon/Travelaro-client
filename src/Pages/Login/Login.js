@@ -27,6 +27,25 @@ const Login = () => {
     logInUser(email, password)
     .then(result =>{
       const user = result.user;
+      const currentUser = {
+        email: user?.email
+      }
+      console.log(currentUser);
+      // get jwt token
+      fetch(`http://localhost:5000/jwt`, {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify(currentUser)
+      })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        // not the best place but for assignment purpose
+        localStorage.setItem('travelaro-token', data.token);
+      })
+
       toast.success('Log In Successfull');
       setUser(user)
       navigate(from, {replace: true});
@@ -38,6 +57,25 @@ const Login = () => {
     signInWithGoogle(googleProvider)
     .then(result =>{
       const user = result.user;
+      const currentUser = {
+        email: user?.email
+      }
+      console.log(currentUser);
+      
+      // get jwt token
+      fetch(`http://localhost:5000/jwt`, {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify(currentUser)
+      })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        // not the best place but for assignment purpose
+        localStorage.setItem('travelaro-token', data.token);
+      })
       setUser(user);
       toast.success('Log In Successfull');
       navigate(from, {replace: true});
@@ -49,6 +87,26 @@ const Login = () => {
     signInWithfacebook(facebookProvider)
     .then(result =>{
       const user = result.user;
+      const currentUser = {
+        email: user?.email
+      }
+      console.log(currentUser);
+
+      // get jwt token
+      fetch(`http://localhost:5000/jwt`, {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify(currentUser)
+      })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        // not the best place but for assignment purpose
+        localStorage.setItem('travelaro-token', data.token);
+      })
+
       setUser(user);
       toast.success('Log In Successfull');
       navigate(from, {replace: true});
