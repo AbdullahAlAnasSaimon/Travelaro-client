@@ -28,7 +28,7 @@ const Login = () => {
     .then(result =>{
       const user = result.user;
       const currentUser = {
-        email: user?.email
+        email: user.email
       }
       console.log(currentUser);
       // get jwt token
@@ -42,12 +42,11 @@ const Login = () => {
       .then(res => res.json())
       .then(data => {
         console.log(data);
+        setUser({...user, token: data.token})
         // not the best place but for assignment purpose
         localStorage.setItem('travelaro-token', data.token);
       })
-
       toast.success('Log In Successfull');
-      setUser(user)
       navigate(from, {replace: true});
     })
     .catch(err => toast.error('Error: ' + err.message.slice(9, err.message.length)))
@@ -57,11 +56,12 @@ const Login = () => {
     signInWithGoogle(googleProvider)
     .then(result =>{
       const user = result.user;
+
       const currentUser = {
-        email: user?.email
+        email: user.email
       }
       console.log(currentUser);
-      
+
       // get jwt token
       fetch(`http://localhost:5000/jwt`, {
         method: 'POST',
@@ -76,7 +76,6 @@ const Login = () => {
         // not the best place but for assignment purpose
         localStorage.setItem('travelaro-token', data.token);
       })
-      setUser(user);
       toast.success('Log In Successfull');
       navigate(from, {replace: true});
     })
@@ -88,7 +87,7 @@ const Login = () => {
     .then(result =>{
       const user = result.user;
       const currentUser = {
-        email: user?.email
+        email: user.email
       }
       console.log(currentUser);
 
@@ -106,8 +105,6 @@ const Login = () => {
         // not the best place but for assignment purpose
         localStorage.setItem('travelaro-token', data.token);
       })
-
-      setUser(user);
       toast.success('Log In Successfull');
       navigate(from, {replace: true});
     })
@@ -115,7 +112,7 @@ const Login = () => {
   }
 
   return (
-    <div>
+    <div className='w-4/12 mx-auto my-20'>
       <div>
         <button onClick={handleGoogleSignIn} className='text-3xl'><FcGoogle/></button>
         <button onClick={handleFacebookSignIn} className='text-3xl'><FaFacebook/></button>

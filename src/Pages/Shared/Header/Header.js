@@ -10,8 +10,10 @@ const Header = () => {
 
   const handleLogOut = () => {
     logOut()
-      .then(() => { })
+      .then(() => {
+      })
       .catch(err => toast.error('Error: ' + err.message.slice(9, err.message.length - 1)))
+      localStorage.removeItem('travelaro-token');
   }
 
 

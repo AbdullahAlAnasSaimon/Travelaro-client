@@ -4,42 +4,41 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 
 const MyReviews = () => {
-  const { user, logOut } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [myReviews, setMyReviews] = useState([]);
-
+  // console.log(user);
   useEffect(() => {
     fetch(`http://localhost:5000/reviews?email=${user?.email}`, {
       headers: {
-        authorization: `Bearer ${localStorage.getItem('travelaro-token')}`
+        // authorization: `Bearer ${localStorage.getItem('travelaro-token')}`
+        authorization: `Bearer ${user.token || localStorage.getItem('travelaro-token')}`
       }
     })
-      .then(res => {
-        if(res.status === 401 || res.status === 403){
-          logOut();
-        }
-        return res.json();
-      })
+      .then(res => res.json())
       .then(data => {
+        // console.log(data.status);
+        if(data.status >= 400){
+          return;
+        }
         setMyReviews(data);
       })
-  }, [user?.email])
+  }, [user?.token, user?.email])
 
-  const handleDelete = id =>{
-    // console.log(id);
+  const handleDelete = id => {
     const proceed = window.confirm("Are you sure, you want to preceed this action?");
-    if(proceed){
+    if (proceed) {
       fetch(`http://localhost:5000/reviews/${id}`, {
         method: 'DELETE'
       })
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
-        if(data.deletedCount > 0){
-          toast.success('Review Deleted Successfully');
-          const remainig = myReviews.filter(review => review._id !== id)
-          setMyReviews(remainig);
-        }
-      })
+        .then(res => res.json())
+        .then(data => {
+          console.log(data);
+          if (data.deletedCount > 0) {
+            toast.success('Review Deleted Successfully');
+            const remainig = myReviews.filter(review => review._id !== id)
+            setMyReviews(remainig);
+          }
+        })
     }
   }
 
@@ -47,7 +46,7 @@ const MyReviews = () => {
     <div>
       <h2>My Reviews page</h2>
       <div className='mb-20 mt-5'>
-        { myReviews.length === 0 ? <p className='text-4xl font-semibold text-gray-300 text-center my-20'>No reviews were added</p> :
+        {myReviews.length === 0 ? <p className='text-4xl font-semibold text-gray-300 text-center my-20'>No reviews were added</p> :
           myReviews.map(review => <SingleReview
             key={review._id}
             review={review}
@@ -61,7 +60,7 @@ const MyReviews = () => {
 
 const SingleReview = ({ review, handleDelete }) => {
   const { _id, description, serviceName, serviceId } = review;
-  
+
   return (
     <div className='border-2 p-2 my-3 flex justify-between items-center w-10/12 mx-auto rounded-md'>
       <div>

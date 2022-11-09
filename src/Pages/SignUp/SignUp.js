@@ -74,7 +74,7 @@ const SignUp = () => {
   }
 
   return (
-    <div>
+    <div className='w-4/12 mx-auto my-20'>
       <div>
         <button onClick={handleGoogleSignIn} className='text-3xl'><FcGoogle/></button>
         <button onClick={handleFacebookSignIn} className='text-3xl'><FaFacebook/></button>
