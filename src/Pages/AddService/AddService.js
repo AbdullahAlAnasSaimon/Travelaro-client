@@ -34,6 +34,9 @@ const AddService = () => {
     .then(res => res.json())
     .then(data => {
       console.log(data);
+      if(data.acknowledged){
+        toast.success('Service Added Successfully');
+      }
     })
     .catch(err => toast.error(err))
   }
@@ -61,7 +64,7 @@ const AddService = () => {
               <textarea className='w-full h-28 block p-2 my-2 outline-0  border-2 border-gray-400 rounded-md focus:border-emerald-400' name="details" id="" placeholder='Enter Description'></textarea>
             </div>
           </div>
-          <button className='ml-5 btn bg-emerald-500 hover:bg-emerald-400 border-0' type='submit'>Add New Course</button>
+          <button className='ml-5 btn bg-emerald-500 hover:bg-emerald-400 border-0' type='submit'>Add New Service</button>
         </form>
       </div>
     </div>
