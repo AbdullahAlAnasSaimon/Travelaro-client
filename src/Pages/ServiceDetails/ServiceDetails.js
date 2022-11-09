@@ -16,7 +16,7 @@ const ServiceDetails = () => {
   useTitle("Service Details")
 
   // sort to decending order
-  console.log(reviews.sort((a, b) => b.insertTime - a.insertTime))
+  // console.log(reviews.sort((a, b) => b.insertTime - a.insertTime))
 
   useEffect(() => {
 
@@ -35,8 +35,8 @@ const ServiceDetails = () => {
   const handleReviewSubmit = event => {
     event.preventDefault();
     const description = event.target.details.value;
-    const date = new Date();
-    const time = date.getTime();
+    const date = new Date().getTime();
+    // const time = date.getTime();
 
     const reviewInfo = {
       serviceId: _id,
@@ -45,7 +45,7 @@ const ServiceDetails = () => {
       photo: user?.photoURL,
       userName: user?.displayName,
       description,
-      insertTime: time
+      insertTime: date
     }
 
     fetch('http://localhost:5000/reviews', {
@@ -60,8 +60,7 @@ const ServiceDetails = () => {
       console.log(data);
       if(data.acknowledged){
         toast.success('Service Added Successfully');
-        const newReview = [...reviews, reviewInfo];
-        newReview.sort(function(a, b){return b.insertTime - a.insertTime});
+        const newReview = [reviewInfo, ...reviews];
         setReviews(newReview);
       }
     })

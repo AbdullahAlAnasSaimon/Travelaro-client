@@ -1,17 +1,15 @@
 import React, { useContext } from 'react';
 import { FcGoogle } from 'react-icons/fc';
-import { FaFacebook } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 import toast from 'react-hot-toast';
-import { FacebookAuthProvider, GoogleAuthProvider } from 'firebase/auth';
+import { GoogleAuthProvider } from 'firebase/auth';
 import useTitle from '../../Hook/useTitle/useTitle';
 
 const SignUp = () => {
-  const {createUser, logOut, signInWithGoogle, signInWithfacebook, setUser, updateUserProfile} = useContext(AuthContext);
+  const {createUser, logOut, signInWithGoogle, setUser, updateUserProfile} = useContext(AuthContext);
 
   const googleProvider = new GoogleAuthProvider();
-  const facebookProvider = new FacebookAuthProvider();
 
   const navigate = useNavigate();
   useTitle('Sign Up');
@@ -55,29 +53,36 @@ const SignUp = () => {
     signInWithGoogle(googleProvider)
     .then(result =>{
       const user = result.user;
-      setUser(user);
-      toast.success('Sign Up Successfull');
+
+      const currentUser = {
+        email: user.email
+      }
+
+      // get jwt token
+      fetch(`http://localhost:5000/jwt`, {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify(currentUser)
+      })
+      .then(res => res.json())
+      .then(data => {
+        setUser({...user, token: data.token})
+        // not the best place but for assignment purpose
+        localStorage.setItem('travelaro-token', data.token);
+      })
+      toast.success('Log In Successfull');
       navigate('/');
     })
     .catch(err => toast.error("Error: " + err.message.slice(9, err.message.length)))
   }
 
-  const handleFacebookSignIn = () =>{
-    signInWithfacebook(facebookProvider)
-    .then(result =>{
-      const user = result.user;
-      setUser(user);
-      toast.success('Sign Up Successfull');
-      navigate('/');
-    })
-    .catch(err => toast.error("Error: " + err.message.slice(9, err.message.length)))
-  }
 
   return (
     <div className='w-4/12 mx-auto my-20'>
       <div>
         <button onClick={handleGoogleSignIn} className='text-3xl'><FcGoogle/></button>
-        <button onClick={handleFacebookSignIn} className='text-3xl'><FaFacebook/></button>
       </div>
       <form onSubmit={handleSignUp}>
         <div>
