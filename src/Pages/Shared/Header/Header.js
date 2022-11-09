@@ -72,7 +72,7 @@ const Header = () => {
                       </Link>
                     </li>
                     <li><Link to='/add-service'>Add Service</Link></li>
-                    <li><Link><button onClick={handleLogOut}>Log Out</button></Link></li>
+                    <li><button onClick={handleLogOut}>Log Out</button></li>
                   </ul>
                 </div>
               </>
