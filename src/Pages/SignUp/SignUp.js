@@ -8,18 +8,19 @@ import { FacebookAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import useTitle from '../../Hook/useTitle/useTitle';
 
 const SignUp = () => {
-  const {createUser, logOut, signInWithGoogle, signInWithfacebook, setUser} = useContext(AuthContext);
+  const {createUser, logOut, signInWithGoogle, signInWithfacebook, setUser, updateUserProfile} = useContext(AuthContext);
 
-  const googleProvider = new GoogleAuthProvider;
-  const facebookProvider = new FacebookAuthProvider;
+  const googleProvider = new GoogleAuthProvider();
+  const facebookProvider = new FacebookAuthProvider();
 
   const navigate = useNavigate();
-  useTitle('Sign Up')
+  useTitle('Sign Up');
 
   const handleSignUp = event =>{
     event.preventDefault();
     const form = event.target;
     const name = form.name.value;
+    const photoURL = form.photo.value;
     const email = form.email.value;
     const password = form.password.value;
     const confirmPassword = form.confirm.value;
@@ -33,10 +34,21 @@ const SignUp = () => {
         const user = result.user;
         console.log(user);
         toast.success('Sign Up Successfull');
+        handleupdateUserProfile(name, photoURL);
         logOut();
         navigate('/login');
       })
       .catch(err => toast.error('Error: ' + err.message.slice(9, err.message.length)))
+  }
+
+  const handleupdateUserProfile = (name, photoURL) => {
+    const profile = {
+      displayName: name,
+      photoURL
+    }
+    updateUserProfile(profile)
+    .then(() => {})
+    .catch(err => toast.error(err.message))
   }
 
   const handleGoogleSignIn = () =>{
@@ -45,6 +57,7 @@ const SignUp = () => {
       const user = result.user;
       setUser(user);
       toast.success('Sign Up Successfull');
+      navigate('/');
     })
     .catch(err => toast.error("Error: " + err.message.slice(9, err.message.length)))
   }
@@ -55,6 +68,7 @@ const SignUp = () => {
       const user = result.user;
       setUser(user);
       toast.success('Sign Up Successfull');
+      navigate('/');
     })
     .catch(err => toast.error("Error: " + err.message.slice(9, err.message.length)))
   }
@@ -79,7 +93,7 @@ const SignUp = () => {
         <div>
           <label htmlFor="email">Photo Url</label>
           <br />
-          <input className='border-2 border-green-200 p-2 outline-0 focus:border-[#2bf29c]' type="text" name='Photo' placeholder='Photo Url' required/>
+          <input className='border-2 border-green-200 p-2 outline-0 focus:border-[#2bf29c]' type="text" name='photo' placeholder='Photo Url' required/>
         </div>
         <div>
           <label htmlFor="password">Password</label>

@@ -6,7 +6,6 @@ import Service from './Service/Service';
 const Services = () => {
   const services = useLoaderData();
   useTitle('Services')
-  console.log(services);
   return (
     <div>
       <h2>Services page</h2>

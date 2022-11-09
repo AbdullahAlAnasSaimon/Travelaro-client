@@ -39,7 +39,8 @@ const Login = () => {
     .then(result =>{
       const user = result.user;
       setUser(user);
-      toast.success('Sign Up Successfull');
+      toast.success('Log In Successfull');
+      navigate(from, {replace: true});
     })
     .catch(err => toast.error("Error: " + err.message.slice(9, err.message.length)))
   }
@@ -49,7 +50,8 @@ const Login = () => {
     .then(result =>{
       const user = result.user;
       setUser(user);
-      toast.success('Sign Up Successfull');
+      toast.success('Log In Successfull');
+      navigate(from, {replace: true});
     })
     .catch(err => toast.error("Error: " + err.message.slice(9, err.message.length)))
   }
