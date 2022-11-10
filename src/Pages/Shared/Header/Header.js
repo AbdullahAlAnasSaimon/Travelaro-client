@@ -16,7 +16,6 @@ const Header = () => {
       localStorage.removeItem('travelaro-token');
   }
 
-
   return (
     <div className='bg-[#002333]'>
       <div className="navbar w-full md:w-11/12 mx-auto">
@@ -76,7 +75,7 @@ const Header = () => {
                 </div>
               </>
               :
-              <Link to='/signup' className="text-center bg-[#2bf29c] hover:bg-[#19e98f] py-2 px-3 rounded-md">Get Started<FaLongArrowAltRight className='inline-block ml-2' /> </Link>
+              <Link to='/login' className="text-center bg-[#2bf29c] hover:bg-[#19e98f] py-2 px-3 rounded-md">Log In<FaLongArrowAltRight className='inline-block ml-2' /> </Link>
           }
         </div>
       </div>
