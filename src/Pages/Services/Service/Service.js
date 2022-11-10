@@ -6,7 +6,7 @@ const Service = ({ service }) => {
   const { _id, name, price, rating, photo, details } = service;
   return (
     <div className="w-auto border-2 rounded-md">
-      <div className='h-[305px] p-3 bg-green-50'>
+      <div className='h-[305px] p-3'>
         <PhotoProvider>
           <PhotoView src={photo}>
             <figure className='rounded-md h-[280px]'><img className='h-[280px] w-full rounded-md' src={photo} alt="Shoes" /></figure>
