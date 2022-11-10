@@ -80,7 +80,7 @@ const ServiceDetails = () => {
           <form className='mb-10' onSubmit={handleReviewSubmit}>
             <div className='m-7'>
               <div className='flex'>
-                <span className='mr-5 hidden md:block'>
+                <span className='mr-5'>
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                   <img className='w-10 rounded-full' src={user?.photoURL} alt="" />
                 </label>

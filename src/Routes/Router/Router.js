@@ -24,8 +24,7 @@ export const router = createBrowserRouter([
       },
       {
         path: '/home',
-        element: <Home></Home>,
-        loader: () => fetch('https://travelaro-server.vercel.app/limited-services')
+        element: <Home></Home>
       },
       {
         path: '/services',
