@@ -1,11 +1,12 @@
 import React from 'react';
 import toast from 'react-hot-toast';
 import { Link, useLoaderData } from 'react-router-dom';
+import useTitle from '../../../Hook/useTitle/useTitle';
 
 const EditReview = () => {
   const review = useLoaderData();
   const { _id, description, serviceName, serviceId } = review;
-
+  useTitle('Edit Review');
 
   const handleUpdateReview = event =>{
     event.preventDefault();
@@ -27,7 +28,8 @@ const EditReview = () => {
   }
 
   return (
-    <div className='w-11/12 md:w-10-12 mx-auto my-20'>
+    <div className='w-11/12 md:w-10-12 mx-auto mt-10 mb-20'>
+      <h2 className='text-3xl font-bold text-center my-10'>Edit Review</h2>
       <div className='border-2 p-2 my-3 flex flex-col md:flex-row justify-start md:justify-between items-start md:items-center w-10/12 mx-auto rounded-md'>
         <div>
           <h4 className='text-xl font-semibold hover:underline'><Link to={`/services/${serviceId}`}>{serviceName}</Link></h4>

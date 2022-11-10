@@ -22,6 +22,7 @@ Travelaro is a personal travel/tour guidance platform, to helps hundreds of peop
 - Used TailwindCss for responsiveness.
 - Used daisyUi for TailwindCss component library.
 - Used React for single page application.
+- Used React Router Dom.
 - Used Firebase for authentication system & hosting.
 - Used JWT for secure data in server side.
 - Used Expressjs in the backend.
