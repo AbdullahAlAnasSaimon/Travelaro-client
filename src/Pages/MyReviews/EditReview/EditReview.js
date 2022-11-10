@@ -1,4 +1,5 @@
 import React from 'react';
+import toast from 'react-hot-toast';
 import { Link, useLoaderData } from 'react-router-dom';
 
 const EditReview = () => {
@@ -8,7 +9,21 @@ const EditReview = () => {
 
   const handleUpdateReview = event =>{
     event.preventDefault();
-    const details = event.target.details.value;
+    const description = event.target.details.value;
+    fetch(`http://localhost:5000/reviews/${_id}`, {
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({description})
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+      if(data.modifiedCount > 0){
+        toast.success('Review Updated');
+      }
+    })
   }
 
   return (
