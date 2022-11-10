@@ -1,5 +1,5 @@
 import React from 'react';
-import heroImg from '../../images/hero/Hotel-Booking-cuate.png';
+import heroImg from '../../../images/hero/Hotel-Booking-cuate.png';
 import { FaLongArrowAltRight } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 

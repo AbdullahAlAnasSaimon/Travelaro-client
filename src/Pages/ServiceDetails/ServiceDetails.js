@@ -81,7 +81,9 @@ const ServiceDetails = () => {
             <div className='m-7'>
               <div className='flex'>
                 <span className='mr-5 hidden md:block'>
+                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                   <img className='w-10 rounded-full' src={user?.photoURL} alt="" />
+                </label>
                 </span>
                 <div className='w-full'>
                   <div className='w-full'>

@@ -18,8 +18,7 @@ const MyReviews = () => {
     })
       .then(res => res.json())
       .then(data => {
-        // console.log(data.status);
-        if(data.status >= 400){
+        if (data.status >= 400) {
           return;
         }
         setMyReviews(data);
@@ -47,14 +46,15 @@ const MyReviews = () => {
   return (
     <div>
       <h2 className='text-3xl font-bold text-center my-10'>My Reviews</h2>
-      <div className='mb-20 mt-5'>
-        {myReviews.length === 0 ? <p className='text-4xl font-semibold text-gray-300 text-center my-20'>No reviews were added</p> :
-          myReviews.map(review => <SingleReview
-            key={review._id}
-            review={review}
-            handleDelete={handleDelete}
-          ></SingleReview>)
-        }
+      <div className='mb-20 mt-5'> 
+          {
+            myReviews.length === 0 ? <p className='text-4xl font-semibold text-gray-300 text-center my-20'>No reviews were added</p> :
+              myReviews.map(review => <SingleReview
+                key={review._id}
+                review={review}
+                handleDelete={handleDelete}
+              ></SingleReview>)
+          }
       </div>
     </div>
   );

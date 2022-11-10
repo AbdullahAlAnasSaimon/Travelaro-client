@@ -6,6 +6,7 @@ const EditReview = () => {
   const review = useLoaderData();
   const { _id, description, serviceName, serviceId } = review;
 
+
   const handleUpdateReview = event =>{
     event.preventDefault();
     const description = event.target.details.value;
@@ -18,9 +19,9 @@ const EditReview = () => {
     })
     .then(res => res.json())
     .then(data => {
-      console.log(data);
       if(data.modifiedCount > 0){
         toast.success('Review Updated');
+        event.target.reset();
       }
     })
   }

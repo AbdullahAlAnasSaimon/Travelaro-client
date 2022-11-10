@@ -26,6 +26,7 @@ const SignUp = () => {
 
     if (password !== confirmPassword) {
       toast.error('Password Did not Matched');
+      return;
     }
 
     createUser(email, password)
