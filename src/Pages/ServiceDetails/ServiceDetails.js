@@ -15,8 +15,6 @@ const ServiceDetails = () => {
   const navigate = useNavigate();
   useTitle("Service Details")
 
-  // sort to decending order
-  // console.log(reviews.sort((a, b) => b.insertTime - a.insertTime))
 
   useEffect(() => {
 
@@ -36,7 +34,6 @@ const ServiceDetails = () => {
     event.preventDefault();
     const description = event.target.details.value;
     const date = new Date().getTime();
-    // const time = date.getTime();
 
     const reviewInfo = {
       serviceId: _id,

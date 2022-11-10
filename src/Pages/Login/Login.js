@@ -30,7 +30,6 @@ const Login = () => {
       const currentUser = {
         email: user?.email
       }
-      console.log(currentUser);
       // get jwt token
       fetch(`http://localhost:5000/jwt`, {
         method: 'POST',
@@ -41,7 +40,6 @@ const Login = () => {
       })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         setUser({...user, token: data.token})
         // not the best place but for assignment purpose
         localStorage.setItem('travelaro-token', data.token);

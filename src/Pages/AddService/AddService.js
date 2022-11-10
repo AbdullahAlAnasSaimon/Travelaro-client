@@ -42,11 +42,11 @@ const AddService = () => {
   }
   return (
     <div>
-      <div className='w-10/12 mx-auto'>
+      <div className='w-10/12 mx-auto my-5'>
         <h2 className='text-3xl font-bold text-center my-10'>Add Services page</h2>
         <form onSubmit={handleAddService}>
-          <div className='grid grid-cols-3 gap-x-8 m-7'>
-            <div className='col-span-2'>
+          <div className='grid grid-cols-1 md:grid-cols-3 gap-x-8 m-7'>
+            <div className='col-span-0 md:col-span-2'>
               <label htmlFor="title" className='block'>Service Name <small>(Max character 28)</small></label>
               <input className='w-full p-2 my-2 outline-0 border-2 border-gray-400 rounded-md focus:border-emerald-400' type="text" name='title' placeholder='Service Name' />
             </div>
