@@ -2,11 +2,12 @@ import React, { useContext, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
+import useTitle from '../../Hook/useTitle/useTitle';
 
 const MyReviews = () => {
   const { user } = useContext(AuthContext);
   const [myReviews, setMyReviews] = useState([]);
-  // console.log(user);
+  useTitle('My Review')
 
   useEffect(() => {
     fetch(`http://localhost:5000/reviews?email=${user?.email}`, {
@@ -45,7 +46,7 @@ const MyReviews = () => {
 
   return (
     <div>
-      <h2 className='text-3xl font-bold text-center my-10'>My Reviews page</h2>
+      <h2 className='text-3xl font-bold text-center my-10'>My Reviews</h2>
       <div className='mb-20 mt-5'>
         {myReviews.length === 0 ? <p className='text-4xl font-semibold text-gray-300 text-center my-20'>No reviews were added</p> :
           myReviews.map(review => <SingleReview

@@ -5,7 +5,6 @@ import { Link, useLoaderData } from 'react-router-dom';
 const EditReview = () => {
   const review = useLoaderData();
   const { _id, description, serviceName, serviceId } = review;
-  console.log(review);
 
   const handleUpdateReview = event =>{
     event.preventDefault();
@@ -27,7 +26,7 @@ const EditReview = () => {
   }
 
   return (
-    <div>
+    <div className='w-11/12 md:w-10-12 mx-auto my-20'>
       <div className='border-2 p-2 my-3 flex flex-col md:flex-row justify-start md:justify-between items-start md:items-center w-10/12 mx-auto rounded-md'>
         <div>
           <h4 className='text-xl font-semibold hover:underline'><Link to={`/services/${serviceId}`}>{serviceName}</Link></h4>
