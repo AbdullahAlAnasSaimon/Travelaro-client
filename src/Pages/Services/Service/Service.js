@@ -5,12 +5,14 @@ import { PhotoProvider, PhotoView } from 'react-photo-view';
 const Service = ({ service }) => {
   const { _id, name, price, rating, photo, details } = service;
   return (
-    <div className="card card-compact w-auto bg-base-100 shadow-lg z-0">
-      <PhotoProvider>
-        <PhotoView src={photo}>
-          <figure><img className='h-[300px]' src={photo} alt="Shoes" /></figure>
-        </PhotoView>
-      </PhotoProvider>
+    <div className="w-auto border-2 rounded-md">
+      <div className='h-[305px] p-3 bg-green-50'>
+        <PhotoProvider>
+          <PhotoView src={photo}>
+            <figure className='rounded-md h-[280px]'><img className='h-[280px] w-full rounded-md' src={photo} alt="Shoes" /></figure>
+          </PhotoView>
+        </PhotoProvider>
+      </div>
       <div className="card-body">
         <p>{rating}</p>
         <h2 className="card-title">{name}</h2>
