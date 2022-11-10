@@ -24,11 +24,6 @@ const ServiceDetails = () => {
 
   }, [_id])
 
-  const handleAddReview = () => {
-    if (!user) {
-      return toast.error('You have to login first');
-    }
-  }
 
   const handleReviewSubmit = event => {
     event.preventDefault();
@@ -52,41 +47,42 @@ const ServiceDetails = () => {
       },
       body: JSON.stringify(reviewInfo)
     })
-    .then(res => res.json())
-    .then(data => {
-      console.log(data);
-      if(data.acknowledged){
-        toast.success('Service Added Successfully');
-        const newReview = [reviewInfo, ...reviews];
-        setReviews(newReview);
-      }
-    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        if (data.acknowledged) {
+          toast.success('Service Added Successfully');
+          const newReview = [reviewInfo, ...reviews];
+          setReviews(newReview);
+        }
+      })
+    event.target.reset();
   }
 
   return (
-    <div>
-      <h2>The service details page</h2>
-      <div className="card card-compact w-96 bg-base-100 shadow-lg z-0">
-        <figure><img className='h-[300px]' src={photo} alt="Shoes" /></figure>
-        <div className="card-body">
+    <div className='w-11/12 md:w-10/12 mx-auto'>
+      <h2 className="text-3xl font-bold my-10 text-center">{name}</h2>
+      <div className="mt-20">
+        <figure><img className='w-auto md:w-[700px] mx-auto' src={photo} alt="Shoes" /></figure>
+        <div className="">
           <p>{rating}</p>
-          <h2 className="card-title">{name}</h2>
-          <p>{details.slice(0, 80) + '...'}</p>
-          <div className="card-actions justify-between mt-5">
-            <h2 className='text-4xl font-bold'>${price}</h2>
+          <h2 className='text-4xl font-bold text-[#42e29d]'>${price}</h2>
+          <p className='my-5'>{details}</p>
+          <div className="mb-8">
           </div>
+          <hr />
         </div>
       </div>
       {!user &&
-        <button onClick={handleAddReview} className="btn btn-primary">Add Review</button>
+        <p className='text-center my-10'>Please <Link className='underline text-green-600' to='/login'>Login</Link> to add a review.</p>
       }
       {
         user &&
-        <div>
-          <form onSubmit={handleReviewSubmit}>
+        <div className='my-10'>
+          <form className='mb-10' onSubmit={handleReviewSubmit}>
             <div className='m-7'>
               <div className='flex'>
-                <span className=''>
+                <span className='mr-5 hidden md:block'>
                   <img className='w-10 rounded-full' src={user?.photoURL} alt="" />
                 </span>
                 <div className='w-full'>
@@ -97,15 +93,17 @@ const ServiceDetails = () => {
                 </div>
               </div>
             </div>
-            <button className='ml-5 btn bg-emerald-500 hover:bg-emerald-400 border-0' type='submit'>Post Review</button>
+            <button className='ml-5 border-2 border-emerald-400 bg-[#2bf29c] hover:bg-[#19e98f] py-2 px-3 rounded-md' type='submit'>Post Review</button>
           </form>
+          <hr />
         </div>
       }
+      {reviews.length === 0 ? <p className='text-center text-gray-300 text-xl my-5'>No Review Found</p> : <h2>Total Review ({reviews.length})</h2>}
       <div>
         {
           reviews.map(review => <ShowReviews
-          key={review._id}
-          review={review}
+            key={review._id}
+            review={review}
           ></ShowReviews>)
         }
       </div>

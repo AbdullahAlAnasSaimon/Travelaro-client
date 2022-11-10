@@ -1,14 +1,29 @@
 import React from 'react';
+import {FaStar} from 'react-icons/fa';
 
-const ShowReviews = ({review}) => {
-  const {photo, description, insertTime, userName} = review;
+const ShowReviews = ({ review }) => {
+  const { photo, description, insertTime, userName } = review;
+  const newTime = Date(insertTime);
   // console.log(insertTime.split(''))
   return (
     <div className='border-2 p-3 my-4 w-10/12 mx-auto rounded-md'>
-      <img className='w-10 rounded-full' src={photo} alt="" />
-      <p className='text-[12px]'>{insertTime}</p>
-      <h4>{userName}</h4>
-      <p>{description}</p>
+      <div className='flex items-center'>
+        <div>
+          <img className='w-10 rounded-full' src={photo} alt="" />
+        </div>
+        <div className='ml-2'>
+          <h4 className='text-lg font-semibold'>{userName}</h4>
+          <p className='text-[12px]'>{newTime.slice(0, 24)}</p>
+        </div>
+      </div>
+      <div>
+        <FaStar className='inline-block text-[#3ccf8f]'/>
+        <FaStar className='inline-block text-[#3ccf8f]'/>
+        <FaStar className='inline-block text-[#3ccf8f]'/>
+        <FaStar className='inline-block text-[#3ccf8f]'/>
+        <FaStar className='inline-block text-[#3ccf8f]'/>
+      </div>
+      <p className='mt-3 mb-2'>{description}</p>
     </div>
   );
 };

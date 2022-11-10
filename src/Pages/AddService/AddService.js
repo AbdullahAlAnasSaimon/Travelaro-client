@@ -15,13 +15,15 @@ const AddService = () => {
     const photo = form.photo.value;
     const details = form.details.value;
     console.log(name, price, photo, details);
+    const time = new Date().getTime();
 
     const serviceInfo = {
       email: user?.email,
       name,
       price,
       photo,
-      details
+      details,
+      time
     }
 
     fetch('http://localhost:5000/services', {
@@ -42,7 +44,7 @@ const AddService = () => {
   }
   return (
     <div>
-      <div className='w-10/12 mx-auto my-5'>
+      <div className='w-11/12 md:w-10/12 mx-auto my-5'>
         <h2 className='text-3xl font-bold text-center my-10'>Add Services page</h2>
         <form onSubmit={handleAddService}>
           <div className='grid grid-cols-1 md:grid-cols-3 gap-x-8 m-7'>
@@ -65,7 +67,7 @@ const AddService = () => {
               <textarea className='w-full h-28 block p-2 my-2 outline-0  border-2 border-gray-400 rounded-md focus:border-emerald-400' name="details" id="" placeholder='Enter Description'></textarea>
             </div>
           </div>
-          <button className='ml-5 btn bg-emerald-500 hover:bg-emerald-400 border-0' type='submit'>Add New Service</button>
+          <button className='ml-5 border-2 border-emerald-400 bg-[#2bf29c] hover:bg-[#19e98f] py-2 px-3 rounded-md' type='submit'>Add New Service</button>
         </form>
       </div>
     </div>

@@ -48,16 +48,16 @@ export const router = createBrowserRouter([
       {
         path: '/add-service',
         element: <PrivateRoute><AddService></AddService></PrivateRoute>
-      },
-      {
-        path: '/login',
-        element: <Login></Login>
-      },
-      {
-        path: '/signup',
-        element: <SignUp></SignUp>
       }
     ]
+  },
+  {
+    path: '/login',
+    element: <Login></Login>
+  },
+  {
+    path: '/signup',
+    element: <SignUp></SignUp>
   },
   {
     path: '*',
