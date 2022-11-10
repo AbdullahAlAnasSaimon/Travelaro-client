@@ -90,7 +90,7 @@ const Login = () => {
       </div>
       <div className='w-11/12 md:w-6/12 mx-auto md:mx-0 px-10 md:px-20'>
         <div>
-          <button onClick={handleGoogleSignIn} className='rounded-md border-2 border-green-500 hover:bg-gray-100 p-1 my-3 w-full'><FcGoogle className='text-2xl inline-block' /> Sign Up With Google</button>
+          <button onClick={handleGoogleSignIn} className='rounded-md border-2 border-green-500 hover:bg-gray-100 p-1 my-3 w-full'><FcGoogle className='text-2xl inline-block' /> Log In With Google</button>
         </div>
         <form onSubmit={handleLogIn}>
           <div className='my-3'>
