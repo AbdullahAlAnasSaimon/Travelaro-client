@@ -69,8 +69,8 @@ const SingleReview = ({ review, handleDelete }) => {
         <p>{description}</p>
       </div>
       <div className='my-3 md:my-0'>
-        <Link to={`/edit-review/${_id}`}><button className='bg-indigo-500 hover:bg-indigo-400 py-1 px-3 mx-2 rounded-md'>Edit</button></Link>
-        <button onClick={() => handleDelete(_id)} className='bg-red-500 hover:bg-red-400 py-1 px-3 mx-2 rounded-md'>Delete</button>
+        <Link to={`/edit-review/${_id}`}><button className='bg-indigo-500 hover:bg-indigo-400 py-1 px-3 mx-2 rounded-md'>Edit Review</button></Link>
+        <button onClick={() => handleDelete(_id)} className='bg-red-500 hover:bg-red-400 py-1 px-3 mx-2 rounded-md'>Delete Review</button>
       </div>
     </div>
   )

@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link, useLoaderData, useNavigate } from 'react-router-dom';
-import { FaUserCircle } from 'react-icons/fa';
+import { Link, useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 import toast from 'react-hot-toast';
 import useTitle from '../../Hook/useTitle/useTitle';
@@ -12,7 +11,6 @@ const ServiceDetails = () => {
   const [reviews, setReviews] = useState([]);
   const service = useLoaderData();
   const { _id, name, price, rating, photo, details } = service;
-  const navigate = useNavigate();
   useTitle("Service Details")
 
 

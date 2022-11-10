@@ -41,6 +41,7 @@ const AddService = () => {
         }
       })
       .catch(err => toast.error(err))
+      form.reset();
   }
   return (
     <div>
