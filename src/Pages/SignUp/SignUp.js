@@ -81,11 +81,11 @@ const SignUp = () => {
 
 
   return (
-    <div className='flex'>
+    <div className='flex my-20'>
       <div className='w-6/12 hidden md:block'>
         <img className='w-10/12' src={signupImg} alt="" />
       </div>
-      <div className='w-11/12 md:w-6/12 mx-auto md:mx-0 px-20'>
+      <div className='w-11/12 md:w-6/12 mx-auto md:mx-0 px-10 md:px-20'>
         <div>
           <button onClick={handleGoogleSignIn} className='rounded-md border-2 border-green-500 hover:bg-gray-100 p-1 my-3 w-full'><FcGoogle className='text-2xl inline-block' /> Sign Up With Google</button>
         </div>
@@ -97,7 +97,7 @@ const SignUp = () => {
           <div className='my-3'>
             <label htmlFor="name">Full Name</label>
             <br />
-            <input className='rounded-md w-full border-2 border-green-200 p-2 outline-0 focus:border-[#2bf29c]' type="text" name='name' placeholder='Full Name' />
+            <input className='rounded-md w-full border-2 border-green-200 p-2 outline-0 focus:border-[#2bf29c]' type="text" name='name' placeholder='Full Name' required/>
           </div>
           <div className='my-3'>
             <label htmlFor="email">E-mail</label>
@@ -119,10 +119,10 @@ const SignUp = () => {
             <br />
             <input className='rounded-md w-full border-2 border-green-200 p-2 outline-0 focus:border-[#2bf29c]' type="password" name='confirm' placeholder='Confirm Password' required />
           </div>
-          <button type='submit' className='btn'>Sign Up</button>
+          <button className=' my-3 border-2 border-emerald-400 bg-[#2bf29c] hover:bg-[#19e98f] py-2 px-3 rounded-md' type='submit'>Sign Up</button>
         </form>
         <div>
-          <p>Already have an account? <Link to='/login'>Log In</Link></p>
+          <p className='text-center'>Already have an account? <Link className='text-[#3dc487] underline' to='/login'>Log In</Link></p>
         </div>
       </div>
     </div>

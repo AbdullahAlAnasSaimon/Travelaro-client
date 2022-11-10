@@ -5,9 +5,10 @@ import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 import toast from 'react-hot-toast';
 import { GoogleAuthProvider } from 'firebase/auth';
 import useTitle from '../../Hook/useTitle/useTitle';
+import loginImg from '../../images/essential/login.png';
 
 const Login = () => {
-  const {logInUser, setUser, signInWithGoogle } = useContext(AuthContext);
+  const { logInUser, setUser, signInWithGoogle } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
   useTitle('Log In')
@@ -16,7 +17,7 @@ const Login = () => {
 
   const googleProvider = new GoogleAuthProvider();
 
-  const handleLogIn = event =>{
+  const handleLogIn = event => {
     event.preventDefault();
     const form = event.target;
     const email = form.email.value;
@@ -25,82 +26,87 @@ const Login = () => {
 
 
     logInUser(email, password)
-    .then(result =>{
-      const user = result.user;
-      const currentUser = {
-        email: user?.email
-      }
-      // get jwt token
-      fetch(`http://localhost:5000/jwt`, {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json'
-        },
-        body: JSON.stringify(currentUser)
+      .then(result => {
+        const user = result.user;
+        const currentUser = {
+          email: user?.email
+        }
+        // get jwt token
+        fetch(`http://localhost:5000/jwt`, {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify(currentUser)
+        })
+          .then(res => res.json())
+          .then(data => {
+            setUser({ ...user, token: data.token })
+            // not the best place but for assignment purpose
+            localStorage.setItem('travelaro-token', data.token);
+          })
+        toast.success('Log In Successfull');
+        navigate(from, { replace: true });
       })
-      .then(res => res.json())
-      .then(data => {
-        setUser({...user, token: data.token})
-        // not the best place but for assignment purpose
-        localStorage.setItem('travelaro-token', data.token);
-      })
-      toast.success('Log In Successfull');
-      navigate(from, {replace: true});
-    })
-    .catch(err => toast.error('Error: ' + err.message.slice(9, err.message.length)))
+      .catch(err => toast.error('Error: ' + err.message.slice(9, err.message.length)))
   }
 
 
 
-  const handleGoogleSignIn = () =>{
+  const handleGoogleSignIn = () => {
     signInWithGoogle(googleProvider)
-    .then(result =>{
-      const user = result.user;
+      .then(result => {
+        const user = result.user;
 
-      const currentUser = {
-        email: user.email
-      }
+        const currentUser = {
+          email: user.email
+        }
 
-      // get jwt token
-      fetch(`http://localhost:5000/jwt`, {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json'
-        },
-        body: JSON.stringify(currentUser)
+        // get jwt token
+        fetch(`http://localhost:5000/jwt`, {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify(currentUser)
+        })
+          .then(res => res.json())
+          .then(data => {
+            setUser({ ...user, token: data.token })
+            // not the best place but for assignment purpose
+            localStorage.setItem('travelaro-token', data.token);
+          })
+        toast.success('Log In Successfull');
+        navigate(from, { replace: true });
       })
-      .then(res => res.json())
-      .then(data => {
-        setUser({...user, token: data.token})
-        // not the best place but for assignment purpose
-        localStorage.setItem('travelaro-token', data.token);
-      })
-      toast.success('Log In Successfull');
-      navigate(from, {replace: true});
-    })
-    .catch(err => toast.error("Error: " + err.message.slice(9, err.message.length)))
+      .catch(err => toast.error("Error: " + err.message.slice(9, err.message.length)))
   }
 
 
   return (
-    <div className='w-4/12 mx-auto my-20'>
-      <div>
-        <button onClick={handleGoogleSignIn} className='text-3xl'><FcGoogle/></button>
+    <div className='flex my-10 items-center'>
+      <div className='w-6/12 hidden md:block'>
+        <img className='w-10/12' src={loginImg} alt="" />
       </div>
-      <form onSubmit={handleLogIn}>
+      <div className='w-11/12 md:w-6/12 mx-auto md:mx-0 px-10 md:px-20'>
         <div>
-          <label htmlFor="email">E-mail</label>
-          <br />
-          <input className='border-2 border-green-200 p-2 outline-0 focus:border-[#2bf29c]' type="email" name='email' placeholder='Email' required/>
+          <button onClick={handleGoogleSignIn} className='rounded-md border-2 border-green-500 hover:bg-gray-100 p-1 my-3 w-full'><FcGoogle className='text-2xl inline-block' /> Sign Up With Google</button>
         </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <br />
-          <input className='border-2 border-green-200 p-2 outline-0 focus:border-[#2bf29c]' type="password" name='password' placeholder='Password' required/>
-        </div>
-        <button type='submit' className='btn'>Log In</button>
-      </form>
-      <p>Don't have an account? <Link to='/signup'>Sign Up</Link></p>
+        <form onSubmit={handleLogIn}>
+          <div className='my-3'>
+            <label htmlFor="email">E-mail</label>
+            <br />
+            <input className='rounded-md w-full border-2 border-green-200 p-2 outline-0 focus:border-[#2bf29c]' type="email" name='email' placeholder='Email' required />
+          </div>
+          <div className='my-3'>
+            <label htmlFor="password">Password</label>
+            <br />
+            <input className='rounded-md w-full border-2 border-green-200 p-2 outline-0 focus:border-[#2bf29c]' type="password" name='password' placeholder='Password' required />
+          </div>
+          <button type='submit' className='my-3 border-2 border-emerald-400 bg-[#2bf29c] hover:bg-[#19e98f] py-2 px-3 rounded-md'>Log In</button>
+        </form>
+        <p className='text-center'>Don't have an account? <Link to='/signup' className='text-[#3dc487] underline'>Sign Up</Link></p>
+      </div>
     </div>
   );
 };
