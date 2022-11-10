@@ -10,7 +10,7 @@ const MyReviews = () => {
   useTitle('My Review')
 
   useEffect(() => {
-    fetch(`http://localhost:5000/reviews?email=${user?.email}`, {
+    fetch(`https://travelaro-server.vercel.app/reviews?email=${user?.email}`, {
       headers: {
         // authorization: `Bearer ${localStorage.getItem('travelaro-token')}`
         authorization: `Bearer ${user.token || localStorage.getItem('travelaro-token')}`
@@ -30,7 +30,7 @@ const MyReviews = () => {
   const handleDelete = id => {
     const proceed = window.confirm("Are you sure, you want to preceed this action?");
     if (proceed) {
-      fetch(`http://localhost:5000/reviews/${id}`, {
+      fetch(`https://travelaro-server.vercel.app/reviews/${id}`, {
         method: 'DELETE'
       })
         .then(res => res.json())

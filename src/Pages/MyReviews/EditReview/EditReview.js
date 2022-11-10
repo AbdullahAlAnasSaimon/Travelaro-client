@@ -9,7 +9,7 @@ const EditReview = () => {
   const handleUpdateReview = event =>{
     event.preventDefault();
     const description = event.target.details.value;
-    fetch(`http://localhost:5000/reviews/${_id}`, {
+    fetch(`https://travelaro-server.vercel.app/reviews/${_id}`, {
       method: 'PUT',
       headers: {
         'content-type': 'application/json'
