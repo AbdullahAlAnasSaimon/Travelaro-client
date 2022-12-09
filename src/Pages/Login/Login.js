@@ -96,12 +96,12 @@ const Login = () => {
           <div className='my-5'>
             <label htmlFor="email">E-mail</label>
             <br />
-            <input className='rounded-md w-full border-2 border-green-200 p-3 outline-0 focus:border-[#2bf29c]' type="email" name='email' placeholder='Email' required />
+            <input className='rounded-md w-full border-2 border-green-200 p-3 outline-0 focus:border-[#2bf29c] duration-300' type="email" name='email' placeholder='Email' required />
           </div>
           <div className='my-5'>
             <label htmlFor="password">Password</label>
             <br />
-            <input className='rounded-md w-full border-2 border-green-200 p-3 outline-0 focus:border-[#2bf29c]' type="password" name='password' placeholder='Password' required />
+            <input className='rounded-md w-full border-2 border-green-200 p-3 outline-0 focus:border-[#2bf29c] duration-300' type="password" name='password' placeholder='Password' required />
           </div>
           <button type='submit' className='my-3 border-2 border-emerald-400 bg-[#2bf29c] hover:bg-[#19e98f] duration-300 py-3 px-3 rounded-md w-full font-bold'>Log In</button>
         </form>
