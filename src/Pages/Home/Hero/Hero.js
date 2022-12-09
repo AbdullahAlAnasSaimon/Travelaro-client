@@ -15,7 +15,7 @@ const Hero = () => {
             <h1 className="text-3xl text-center md:text-left md:text-5xl font-bold text-[#002333]">Explore The World!</h1>
             <p className="text-center md:text-left py-6 text-gray-600 w-full md:w-10/12">Travel is the movement of people between distant geographical locations. Travel can be done by foot, train, boat, bus, airplane and can be one way or round trip.</p>
             <div className='w-[176px] mx-auto md:mx-0'>
-              <Link to='/services'><button className="w-[176px] text-center border-2 border-emerald-400 bg-[#2bf29c] hover:bg-[#19e98f] py-2 px-3 rounded-md">Browse Services <FaLongArrowAltRight className='inline-block' /></button></Link>
+              <Link to='/services'><button className="w-[176px] text-center border-2 border-emerald-400 bg-[#2bf29c] hover:bg-[#19e98f] py-2 px-3 rounded-md duration-300">Browse Services <FaLongArrowAltRight className='inline-block' /></button></Link>
             </div>
           </div>
         </div>

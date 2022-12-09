@@ -75,7 +75,7 @@ const Header = () => {
                 </div>
               </>
               :
-              <Link to='/login' className="text-center bg-[#2bf29c] hover:bg-[#19e98f] py-2 px-3 rounded-md">Log In<FaLongArrowAltRight className='inline-block ml-2' /> </Link>
+              <Link to='/login' className="text-center bg-[#2bf29c] hover:bg-[#19e98f] py-2 px-3 rounded-md duration-300">Log In<FaLongArrowAltRight className='inline-block ml-2' /> </Link>
           }
         </div>
       </div>
