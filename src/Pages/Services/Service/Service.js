@@ -5,7 +5,7 @@ import { PhotoProvider, PhotoView } from 'react-photo-view';
 const Service = ({ service }) => {
   const { _id, name, price, rating, photo, details } = service;
   return (
-    <div className="w-auto border-2 rounded-md shadow-sm hover:shadow-xl duration-300">
+    <div className="w-auto border rounded-md shadow-sm hover:shadow-xl duration-300">
       <div className='h-[305px] p-3'>
         <PhotoProvider>
           <PhotoView src={photo}>
