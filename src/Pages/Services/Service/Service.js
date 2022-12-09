@@ -13,13 +13,13 @@ const Service = ({ service }) => {
           </PhotoView>
         </PhotoProvider>
       </div>
-      <div className="card-body">
+      <div className="card-body relative">
         <p>{rating}</p>
-        <h2 className="card-title">{name}</h2>
-        <p className='text-[15px]'>{details.slice(0, 100) + '...'}</p>
-        <div className="card-actions justify-between mt-5">
+        <h2 className="card-title absolute top-4">{name}</h2>
+        <p className='text-[15px] absolute top-16'>{details.slice(0, 100) + '...'}</p>
+        <div className="flex justify-between mt-5 absolute bottom-0">
           <h2 className='text-4xl font-bold'>${price}</h2>
-          <Link to={`/services/${_id}`}><button className="bg-emerald-300 hover:bg-emerald-400 py-2 px-4 text-lg rounded-md">View Details</button></Link>
+          <Link className='' to={`/services/${_id}`}><button className="bg-emerald-300 hover:bg-emerald-400 py-2 px-4 text-lg rounded-md">View Details</button></Link>
         </div>
       </div>
     </div>
