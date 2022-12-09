@@ -88,7 +88,7 @@ const SignUp = () => {
       </div>
       <div className='w-11/12 md:w-6/12 mx-auto md:mx-0 px-10 md:px-20'>
         <div>
-          <button onClick={handleGoogleSignIn} className='rounded-md bg-green-50 hover:bg-green-100 duration-300 py-3 my-3 w-full'><FcGoogle className='text-2xl inline-block' /> Sign Up With Google</button>
+          <button onClick={handleGoogleSignIn} className='rounded-md border-2 border-green-100 bg-green-50 hover:bg-green-100 duration-300 py-3 my-3 w-full'><FcGoogle className='text-2xl inline-block' /> Sign Up With Google</button>
         </div>
         <div className='my-3 w-11/12 md:w-6/12 mx-auto'>
           <hr />

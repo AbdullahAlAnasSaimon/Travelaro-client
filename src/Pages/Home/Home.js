@@ -32,8 +32,8 @@ const Home = () => {
             ></Service>)
         }
       </div>
-      <div className='my-10  w-[92px] mx-auto'>
-        <Link to='/services'><button className='btn w-[92px]'>See All</button></Link>
+      <div className='my-10  w-[168px] mx-auto'>
+        <Link to='/services'><button className='btn w-[168px]'>See All Services</button></Link>
       </div>
       <div className='w-11/12 mx-auto my-20 bg-[#002333] text-white rounded-md'>
         <div className='grid grid-cols-1 md:grid-cols-4 gap-x-5 p-10'>

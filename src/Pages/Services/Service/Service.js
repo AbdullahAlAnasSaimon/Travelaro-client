@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 
 const Service = ({ service }) => {
-  const { _id, name, price, rating, photo, details } = service;
+  const { _id, name, price, photo, details } = service;
   return (
     <div className="w-auto border rounded-md shadow-sm hover:shadow-xl duration-300">
       <div className='h-[305px] p-3'>
@@ -14,7 +14,13 @@ const Service = ({ service }) => {
         </PhotoProvider>
       </div>
       <div className="card-body relative">
-        <p>{rating}</p>
+        <div className="rating">
+          <input type="radio" name="rating-4" className="mask mask-star-2 bg-green-400 w-[15px]" />
+          <input type="radio" name="rating-4" className="mask mask-star-2 bg-green-400 w-[15px]" />
+          <input type="radio" name="rating-4" className="mask mask-star-2 bg-green-400 w-[15px]" />
+          <input type="radio" name="rating-4" className="mask mask-star-2 bg-green-400 w-[15px]" />
+          <input type="radio" name="rating-4" className="mask mask-star-2 bg-green-400 w-[15px]" />
+        </div>
         <h2 className="card-title">{name}</h2>
         <p className='text-[15px] h-[65px]'>{details.slice(0, 100) + '...'}</p>
         <div className="flex justify-between mt-5">
