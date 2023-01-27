@@ -64,7 +64,7 @@ const ServiceDetails = () => {
         <figure><img className='w-auto md:w-[700px] mx-auto' src={photo} alt="Shoes" /></figure>
         <div className="">
           <p>{rating}</p>
-          <h2 className='text-4xl font-bold text-[#42e29d]'>${price}</h2>
+          <h2 className='text-4xl font-bold text-[#42e29d] mt-5'>Price: ${price}</h2>
           <p className='my-5'>{details}</p>
           <div className="mb-8">
           </div>
