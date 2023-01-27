@@ -98,7 +98,7 @@ const ServiceDetails = () => {
           <hr />
         </div>
       }
-      {reviews.length === 0 ? <p className='text-center text-gray-300 text-xl my-5'>No Review Found</p> : <h2>Total Review ({reviews.length})</h2>}
+      {reviews.length === 0 ? <p className='text-center text-gray-300 text-xl my-5'>No Review Found</p> : <h2 className='text-center'>Total Review ({reviews.length})</h2>}
       <div>
         {
           reviews.map(review => <ShowReviews
